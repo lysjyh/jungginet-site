@@ -1,0 +1,67 @@
+
+body {
+    font-family: 'Noto Sans KR', sans-serif;
+    margin: 0;
+    padding: 0;
+    background: #f9f9f9;
+    color: #333;
+}
+header {
+    background: #012a4a;
+    color: white;
+    text-align: center;
+    padding: 2em 1em;
+}
+.logo {
+    max-width: 160px;
+    margin-bottom: 1em;
+}
+main {
+    padding: 2em;
+}
+h2 {
+    border-left: 6px solid #0077b6;
+    padding-left: 12px;
+}
+ul {
+    list-style: none;
+    padding-left: 0;
+}
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 1.5em;
+}
+.card {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    padding: 1em;
+    text-align: center;
+}
+.contact form {
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+    margin-top: 1em;
+}
+.contact input, .contact textarea {
+    padding: 0.8em;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+.contact button {
+    background: #0077b6;
+    color: white;
+    border: none;
+    padding: 0.8em;
+    border-radius: 4px;
+    cursor: pointer;
+}
+footer {
+    background: #333;
+    color: white;
+    text-align: center;
+    padding: 1em;
+    margin-top: 3em;
+}
