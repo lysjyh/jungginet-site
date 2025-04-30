@@ -4,109 +4,163 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>중기넷 | 건설 장비 및 인력 접수 플랫폼</title>
-  <meta name="description" content="건설장비와 인력을 쉽게 신청하고 연결하는 스마트 플랫폼.">
+  <title>중기넷 통합 접수폼</title>
+  <meta name="description" content="장비 및 건설 인력 구인·구직, 픽업 서비스 신청까지 한번에 가능한 스마트 접수 플랫폼">
   <style>
     body {
-      font-family: "Segoe UI", sans-serif;
+      font-family: Arial, sans-serif;
+      background: #f7f7f7;
       margin: 0;
       padding: 0;
-      background: #f5f7fa;
       color: #333;
     }
     header {
-      background: #0a1f44;
+      background: #003366;
       color: white;
-      padding: 2rem;
       text-align: center;
+      padding: 2rem 1rem;
     }
-    h1 { margin: 0; }
+    header h1 { margin: 0; font-size: 1.8rem; }
     .container {
       max-width: 960px;
       margin: 2rem auto;
       background: white;
       padding: 2rem;
       border-radius: 10px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-    }
-    h2 {
-      color: #0a1f44;
-      margin-bottom: 1rem;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
     }
     label {
-      display: block;
-      margin: 1rem 0 0.3rem;
       font-weight: bold;
+      display: block;
+      margin-top: 1.2rem;
     }
     input, select, textarea {
       width: 100%;
-      padding: 0.7rem;
-      font-size: 1rem;
+      padding: 0.6rem;
+      margin-top: 0.3rem;
       border: 1px solid #ccc;
       border-radius: 6px;
+      font-size: 1rem;
     }
+    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
     button {
-      margin-top: 1.5rem;
-      padding: 0.8rem 2rem;
-      background: #1e40af;
+      background: #0050b3;
       color: white;
       border: none;
+      padding: 0.8rem 2rem;
       font-size: 1.1rem;
       border-radius: 6px;
       cursor: pointer;
+      margin-top: 2rem;
     }
     footer {
       text-align: center;
-      padding: 2rem;
+      color: #777;
       font-size: 0.9rem;
-      color: #666;
+      padding: 2rem;
     }
   </style>
 </head>
 <body>
   <header>
-    <h1>중기넷 | 건설장비 및 인력 접수</h1>
-    <p>필요한 장비 또는 인력을 아래에서 신청하세요</p>
+    <h1>중기넷 통합 접수 플랫폼</h1>
+    <p>장비·인력 구인/구직부터 픽업까지 한번에 신청하세요</p>
   </header>
 
   <div class="container">
-    <h2>접수 신청서</h2>
     <form action="mailto:your@email.com" method="POST" enctype="text/plain">
-      <label for="type">신청 유형</label>
-      <select id="type" name="신청 유형" required>
-        <option value="">선택하세요</option>
-        <option value="장비 요청">장비 요청</option>
-        <option value="인력 요청">인력 요청</option>
-      </select>
+      <div class="grid">
+        <div>
+          <label>신청 구분</label>
+          <select name="신청 구분" required>
+            <option value="">선택하세요</option>
+            <option value="구인">구인 (사장님)</option>
+            <option value="구직">구직 (기사님/인부)</option>
+          </select>
+        </div>
+        <div>
+          <label>신청 대상</label>
+          <select name="신청 대상" required>
+            <option value="">선택하세요</option>
+            <option value="장비">장비</option>
+            <option value="인력">인력</option>
+          </select>
+        </div>
+      </div>
 
-      <label for="category">세부 항목</label>
-      <select id="category" name="세부 항목">
+      <label>장비 선택 (장비일 경우)</label>
+      <select name="장비 항목">
         <option value="">선택하세요</option>
+        <option>덤프 5톤</option>
         <option>덤프 15톤</option>
+        <option>덤프 25톤</option>
+        <option>굴삭기 미니</option>
+        <option>굴삭기 03W</option>
         <option>굴삭기 06W</option>
-        <option>목수</option>
-        <option>신호수</option>
-        <option>공구리</option>
+        <option>굴삭기 10W</option>
+        <option>굴삭기 380W</option>
+        <option>롤러</option>
+        <option>도자</option>
+        <option>그레이다</option>
       </select>
 
-      <label for="location">현장 위치</label>
-      <input type="text" id="location" name="현장 위치" placeholder="예: 경기도 안성시 보개면...">
+      <label>인력 선택 (인력일 경우)</label>
+      <select name="인력 직종">
+        <option value="">선택하세요</option>
+        <option>목수</option>
+        <option>형틀목수</option>
+        <option>철근공</option>
+        <option>콘크리트공</option>
+        <option>미장공</option>
+        <option>타일공</option>
+        <option>방수공</option>
+        <option>조적공</option>
+        <option>비계공</option>
+        <option>해체공</option>
+        <option>배관공</option>
+        <option>설비공</option>
+        <option>전기공</option>
+        <option>용접공</option>
+        <option>신호수</option>
+        <option>곰방</option>
+        <option>공구리</option>
+        <option>잡부</option>
+        <option>운반공</option>
+        <option>소장</option>
+        <option>반장</option>
+        <option>현장보조</option>
+        <option>크레인 유도</option>
+        <option>석면 해체</option>
+      </select>
 
-      <label for="date">희망 날짜</label>
-      <input type="date" id="date" name="희망 날짜" />
+      <label>현장 위치</label>
+      <input type="text" name="현장 위치" placeholder="예: 경기도 안성시 보개면 ○○현장" />
 
-      <label for="details">요청 내용 또는 기타 사항</label>
-      <textarea id="details" name="요청 내용" rows="4" placeholder="현장 여건, 시간, 추가 요청사항 등"></textarea>
+      <label>희망 일자</label>
+      <input type="date" name="희망 일자" />
 
-      <label for="contact">담당자 연락처</label>
-      <input type="tel" id="contact" name="연락처" placeholder="예: 010-1234-5678" required />
+      <label>픽업 서비스</label>
+      <select name="픽업 서비스">
+        <option value="">선택하세요</option>
+        <option>필요함 (픽업 요청)</option>
+        <option>불필요함 (자가 출퇴근)</option>
+      </select>
+
+      <label>요청 내용 / 비고</label>
+      <textarea name="요청 내용" rows="4" placeholder="작업 조건, 경력, 특이사항 등"></textarea>
+
+      <label>이름</label>
+      <input type="text" name="이름" placeholder="신청자 이름" required />
+
+      <label>연락처</label>
+      <input type="tel" name="연락처" placeholder="예: 010-1234-5678" required />
 
       <button type="submit">접수하기</button>
     </form>
   </div>
 
   <footer>
-    © 2025 JUNGGINET.COM | 건설장비 및 인력 매칭 플랫폼
+    © 2025 JUNGGINET.COM | 스마트 건설 장비 & 인력 매칭 시스템
   </footer>
 </body>
 </html>
