@@ -1,31 +1,131 @@
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>중기넷 | 건설장비 & 인력 연결 플랫폼</title>
-  <link rel="stylesheet" href="assets/style.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="중기넷 - 덤프, 굴삭기, 목수, 공구리 등 건설장비 및 인력 연결 플랫폼">
+  <title>중기넷 | 장비와 인력을 쉽게 연결하세요</title>
+  <style>
+    body {
+      font-family: "Arial", sans-serif;
+      background-color: #f7f7f7;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background-color: #222;
+      color: white;
+      text-align: center;
+      padding: 1.5rem 1rem;
+      font-size: 1.4rem;
+    }
+    .container {
+      padding: 1rem;
+    }
+    h2 {
+      font-size: 1.3rem;
+      margin-top: 2rem;
+      color: #444;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+      gap: 1rem;
+      margin-top: 1rem;
+    }
+    .card {
+      background: white;
+      padding: 1rem;
+      border-radius: 10px;
+      text-align: center;
+      font-size: 1.1rem;
+      font-weight: bold;
+      box-shadow: 0 0 10px rgba(0,0,0,0.05);
+      cursor: pointer;
+      transition: 0.2s;
+    }
+    .card:hover {
+      background-color: #e2f0ff;
+      color: #003366;
+    }
+    .notice {
+      margin-top: 1rem;
+      font-size: 1rem;
+      text-align: center;
+      background: #fff3cd;
+      padding: 1rem;
+      border-left: 5px solid #ffcc00;
+      color: #856404;
+    }
+    footer {
+      text-align: center;
+      padding: 1rem;
+      background-color: #222;
+      color: white;
+      font-size: 0.9rem;
+    }
+    .cta {
+      margin-top: 2rem;
+      text-align: center;
+    }
+    .cta a {
+      background: #1e40af;
+      color: #fff;
+      padding: 0.8rem 1.5rem;
+      border-radius: 8px;
+      text-decoration: none;
+      font-size: 1rem;
+    }
+  </style>
 </head>
 <body>
   <header>
-    <h1>중기넷 | JUNGGINET.COM</h1>
-    <p>스마트 건설장비 네트워크 플랫폼</p>
+    중기넷 | JUNGGINET.COM<br>
+    <small>누구나 쉽게! 건설장비와 인력을 연결하세요</small>
   </header>
-  <main>
-    <section>
-      <h2>모든 건설장비, 한 곳에서 연결하세요</h2>
-      <ul>
-        <li>덤프트럭: 5톤, 15톤, 25톤</li>
-        <li>굴삭기: 미니, 03W, 06W, 10W, 380W</li>
-        <li>기타 장비: 롤러, 도자, 그레이다</li>
-      </ul>
-    </section>
-    <section>
-      <a href="construction_jobs.html" class="btn">건설 인력 연결하기</a>
-    </section>
-  </main>
+
+  <div class="container">
+    <div class="notice">
+      ※ 픽업 서비스 가능 / 수수료는 기존 소개소 대비 5%로 저렴합니다. 전화 없이 온라인으로 간편 접수!
+    </div>
+
+    <h2>토공 장비</h2>
+    <div class="grid">
+      <div class="card">덤프 5톤</div>
+      <div class="card">덤프 15톤</div>
+      <div class="card">덤프 25톤</div>
+      <div class="card">굴삭기 미니</div>
+      <div class="card">굴삭기 03W</div>
+      <div class="card">굴삭기 06W</div>
+      <div class="card">굴삭기 10W</div>
+      <div class="card">굴삭기 380W</div>
+      <div class="card">롤러</div>
+      <div class="card">도자</div>
+      <div class="card">그레이더</div>
+    </div>
+
+    <h2>건설 인력</h2>
+    <div class="grid">
+      <div class="card">목수</div>
+      <div class="card">신호수</div>
+      <div class="card">곰방</div>
+      <div class="card">공구리</div>
+      <div class="card">비계공</div>
+      <div class="card">철근공</div>
+      <div class="card">타설공</div>
+      <div class="card">운반보조</div>
+      <div class="card">장비보조</div>
+      <div class="card">청소/마감</div>
+    </div>
+
+    <div class="cta">
+      <a href="#">인력 요청 또는 장비 매칭 접수하기</a>
+    </div>
+  </div>
+
   <footer>
-    <p>© 2025 JUNGGINET.COM. All rights reserved.</p>
+    © 2025 JUNGGINET.COM. All rights reserved.
   </footer>
 </body>
 </html>
