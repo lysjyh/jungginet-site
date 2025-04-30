@@ -2,130 +2,111 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="중기넷 - 덤프, 굴삭기, 목수, 공구리 등 건설장비 및 인력 연결 플랫폼">
-  <title>중기넷 | 장비와 인력을 쉽게 연결하세요</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>중기넷 | 건설 장비 및 인력 접수 플랫폼</title>
+  <meta name="description" content="건설장비와 인력을 쉽게 신청하고 연결하는 스마트 플랫폼.">
   <style>
     body {
-      font-family: "Arial", sans-serif;
-      background-color: #f7f7f7;
+      font-family: "Segoe UI", sans-serif;
       margin: 0;
       padding: 0;
+      background: #f5f7fa;
+      color: #333;
     }
     header {
-      background-color: #222;
+      background: #0a1f44;
       color: white;
+      padding: 2rem;
       text-align: center;
-      padding: 1.5rem 1rem;
-      font-size: 1.4rem;
     }
+    h1 { margin: 0; }
     .container {
-      padding: 1rem;
+      max-width: 960px;
+      margin: 2rem auto;
+      background: white;
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
     }
     h2 {
-      font-size: 1.3rem;
-      margin-top: 2rem;
-      color: #444;
+      color: #0a1f44;
+      margin-bottom: 1rem;
     }
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
-      gap: 1rem;
-      margin-top: 1rem;
-    }
-    .card {
-      background: white;
-      padding: 1rem;
-      border-radius: 10px;
-      text-align: center;
-      font-size: 1.1rem;
+    label {
+      display: block;
+      margin: 1rem 0 0.3rem;
       font-weight: bold;
-      box-shadow: 0 0 10px rgba(0,0,0,0.05);
-      cursor: pointer;
-      transition: 0.2s;
     }
-    .card:hover {
-      background-color: #e2f0ff;
-      color: #003366;
-    }
-    .notice {
-      margin-top: 1rem;
+    input, select, textarea {
+      width: 100%;
+      padding: 0.7rem;
       font-size: 1rem;
-      text-align: center;
-      background: #fff3cd;
-      padding: 1rem;
-      border-left: 5px solid #ffcc00;
-      color: #856404;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+    }
+    button {
+      margin-top: 1.5rem;
+      padding: 0.8rem 2rem;
+      background: #1e40af;
+      color: white;
+      border: none;
+      font-size: 1.1rem;
+      border-radius: 6px;
+      cursor: pointer;
     }
     footer {
       text-align: center;
-      padding: 1rem;
-      background-color: #222;
-      color: white;
+      padding: 2rem;
       font-size: 0.9rem;
-    }
-    .cta {
-      margin-top: 2rem;
-      text-align: center;
-    }
-    .cta a {
-      background: #1e40af;
-      color: #fff;
-      padding: 0.8rem 1.5rem;
-      border-radius: 8px;
-      text-decoration: none;
-      font-size: 1rem;
+      color: #666;
     }
   </style>
 </head>
 <body>
   <header>
-    중기넷 | JUNGGINET.COM<br>
-    <small>누구나 쉽게! 건설장비와 인력을 연결하세요</small>
+    <h1>중기넷 | 건설장비 및 인력 접수</h1>
+    <p>필요한 장비 또는 인력을 아래에서 신청하세요</p>
   </header>
 
   <div class="container">
-    <div class="notice">
-      ※ 픽업 서비스 가능 / 수수료는 기존 소개소 대비 5%로 저렴합니다. 전화 없이 온라인으로 간편 접수!
-    </div>
+    <h2>접수 신청서</h2>
+    <form action="mailto:your@email.com" method="POST" enctype="text/plain">
+      <label for="type">신청 유형</label>
+      <select id="type" name="신청 유형" required>
+        <option value="">선택하세요</option>
+        <option value="장비 요청">장비 요청</option>
+        <option value="인력 요청">인력 요청</option>
+      </select>
 
-    <h2>토공 장비</h2>
-    <div class="grid">
-      <div class="card">덤프 5톤</div>
-      <div class="card">덤프 15톤</div>
-      <div class="card">덤프 25톤</div>
-      <div class="card">굴삭기 미니</div>
-      <div class="card">굴삭기 03W</div>
-      <div class="card">굴삭기 06W</div>
-      <div class="card">굴삭기 10W</div>
-      <div class="card">굴삭기 380W</div>
-      <div class="card">롤러</div>
-      <div class="card">도자</div>
-      <div class="card">그레이더</div>
-    </div>
+      <label for="category">세부 항목</label>
+      <select id="category" name="세부 항목">
+        <option value="">선택하세요</option>
+        <option>덤프 15톤</option>
+        <option>굴삭기 06W</option>
+        <option>목수</option>
+        <option>신호수</option>
+        <option>공구리</option>
+      </select>
 
-    <h2>건설 인력</h2>
-    <div class="grid">
-      <div class="card">목수</div>
-      <div class="card">신호수</div>
-      <div class="card">곰방</div>
-      <div class="card">공구리</div>
-      <div class="card">비계공</div>
-      <div class="card">철근공</div>
-      <div class="card">타설공</div>
-      <div class="card">운반보조</div>
-      <div class="card">장비보조</div>
-      <div class="card">청소/마감</div>
-    </div>
+      <label for="location">현장 위치</label>
+      <input type="text" id="location" name="현장 위치" placeholder="예: 경기도 안성시 보개면...">
 
-    <div class="cta">
-      <a href="#">인력 요청 또는 장비 매칭 접수하기</a>
-    </div>
+      <label for="date">희망 날짜</label>
+      <input type="date" id="date" name="희망 날짜" />
+
+      <label for="details">요청 내용 또는 기타 사항</label>
+      <textarea id="details" name="요청 내용" rows="4" placeholder="현장 여건, 시간, 추가 요청사항 등"></textarea>
+
+      <label for="contact">담당자 연락처</label>
+      <input type="tel" id="contact" name="연락처" placeholder="예: 010-1234-5678" required />
+
+      <button type="submit">접수하기</button>
+    </form>
   </div>
 
   <footer>
-    © 2025 JUNGGINET.COM. All rights reserved.
+    © 2025 JUNGGINET.COM | 건설장비 및 인력 매칭 플랫폼
   </footer>
 </body>
 </html>
