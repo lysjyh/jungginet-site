@@ -4,24 +4,20 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="중기넷은 덤프트럭, 굴삭기, 롤러 등 건설장비와 인력 매칭을 제공하며 소개비 5% 고정과 선택형 픽업 서비스도 제공합니다.">
-  <meta name="keywords" content="중기넷, 굴삭기, 덤프트럭, 직업소개소, 건설현장 인력, 픽업 서비스, 소개비 5%">
-  <title>중기넷 | JUNGGINET.COM</title>
+  <meta name="description" content="중기넷은 덤프트럭, 굴삭기, 롤러 등 건설장비와 인력을 연결하는 스마트 플랫폼입니다.">
+  <meta name="robots" content="index, follow" />
+  <title>중기넷 | 건설장비 및 인력 플랫폼</title>
   <style>
-    body { font-family: 'Segoe UI', sans-serif; margin: 0; background: #f5f7fa; color: #222; }
+    body { font-family: Arial, sans-serif; margin: 0; background: #f5f5f5; color: #222; }
     header { background: #111; color: #fff; padding: 2rem; text-align: center; }
-    header h1 { font-size: 2rem; margin-bottom: 0.5rem; }
+    header h1 { margin: 0.5rem 0; }
     main { max-width: 960px; margin: auto; padding: 2rem 1rem; }
-    section { background: white; padding: 2rem; border-radius: 10px; margin-bottom: 2rem; box-shadow: 0 2px 5px rgba(0,0,0,0.05); }
-    h2 { font-size: 1.4rem; margin-bottom: 1rem; }
-    ul { padding-left: 1rem; }
+    section { background: white; padding: 2rem; margin-bottom: 2rem; border-radius: 8px; box-shadow: 0 1px 4px rgba(0,0,0,0.1); }
+    h2 { margin-top: 0; }
+    ul { padding-left: 1.2rem; }
     li { margin-bottom: 0.4rem; }
-    label { display: block; margin-top: 1rem; font-weight: bold; }
-    input, select, textarea { width: 100%; padding: 0.5rem; margin-top: 0.3rem; border: 1px solid #ccc; border-radius: 6px; }
-    button { margin-top: 1rem; background: #1e40af; color: white; padding: 0.6rem 1.2rem; border: none; border-radius: 6px; cursor: pointer; font-weight: bold; }
-    .list-item { border-top: 1px solid #ddd; padding: 1rem 0; }
-    .note { font-size: 0.9rem; color: #777; margin-top: 0.8rem; }
-    footer { text-align: center; padding: 2rem 1rem; color: #aaa; font-size: 0.9rem; }
+    a.button { display: inline-block; background: #1e40af; color: white; padding: 0.6rem 1rem; text-decoration: none; border-radius: 5px; margin-top: 1rem; font-weight: bold; }
+    footer { text-align: center; font-size: 0.9rem; padding: 2rem; color: #888; }
   </style>
 </head>
 <body>
@@ -32,72 +28,18 @@
 
   <main>
     <section>
-      <h2>주요 장비 리스트</h2>
+      <h2>장비 리스트</h2>
       <ul>
         <li>덤프: 5톤 / 15톤 / 25톤</li>
         <li>굴삭기: 미니 / 03W / 06W / 10W / 380W</li>
-        <li>롤러</li>
-        <li>도자</li>
-        <li>그레이다</li>
+        <li>롤러, 도자, 그레이다 등</li>
       </ul>
     </section>
 
     <section>
-      <h2>인력 등록 (구직자)</h2>
-      <label>이름</label>
-      <input type="text" placeholder="홍길동">
-      <label>보유 장비</label>
-      <select>
-        <option>굴삭기 03W</option>
-        <option>굴삭기 06W</option>
-        <option>덤프 15톤</option>
-        <option>기타</option>
-      </select>
-      <label>희망 근무 지역</label>
-      <input type="text" placeholder="경기 안성, 평택 등">
-      <label>연락처</label>
-      <input type="text" placeholder="010-1234-5678">
-      <label>간단한 자기소개</label>
-      <textarea rows="3" placeholder="경력 8년, 안전수칙 철저하게 준수합니다."></textarea>
-      <label>픽업 요청 여부</label>
-      <select>
-        <option>픽업 불필요 (자가 출퇴근)</option>
-        <option>픽업 필요 (근처에서 기사님 픽업 요청)</option>
-      </select>
-      <div class="note">※ 중기넷은 소개 성사 시 첫 급여의 5%를 고정 소개비로 공제합니다. 픽업은 선택사항입니다.</div>
-      <button>등록하기</button>
-    </section>
-
-    <section>
-      <h2>구직자 목록</h2>
-      <div class="list-item">
-        <strong>김기사</strong> - 굴삭기 06W | 경기 안성 | 010-****-1234<br/>
-        <small>경력 5년, 안전교육 이수 완료</small>
-      </div>
-      <div class="list-item">
-        <strong>박기사</strong> - 덤프 15톤 | 충남 천안 | 010-****-7890<br/>
-        <small>성실하게 일합니다. 야간 가능</small>
-      </div>
-    </section>
-
-    <section>
-      <h2>구인 공고 등록</h2>
-      <label>회사/현장명</label>
-      <input type="text" placeholder="○○건설 안성현장">
-      <label>모집 장비</label>
-      <select>
-        <option>굴삭기</option>
-        <option>덤프</option>
-        <option>기타</option>
-      </select>
-      <label>근무지</label>
-      <input type="text" placeholder="경기 안성 보개면 ○○공사장">
-      <label>요구사항</label>
-      <textarea rows="3" placeholder="경력자 우대, 안전교육 이수자 선호"></textarea>
-      <label>담당자 연락처</label>
-      <input type="text" placeholder="010-0000-0000">
-      <div class="note">※ 중기넷은 소개 성사 시 첫 급여의 5%를 고정 소개비로 공제합니다. 픽업 요청 시 별도 연결됩니다.</div>
-      <button>공고 등록</button>
+      <h2>건설 인력 보기</h2>
+      <p>현장에서 필요한 다양한 직종의 인력을 한눈에 확인할 수 있습니다.</p>
+      <a href="/construction_jobs.html" class="button">건설 인력 보기</a>
     </section>
   </main>
 
