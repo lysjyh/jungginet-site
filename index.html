@@ -1,166 +1,362 @@
-
 <!DOCTYPE html>
 <html lang="ko">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>중기넷 통합 접수폼</title>
-  <meta name="description" content="장비 및 건설 인력 구인·구직, 픽업 서비스 신청까지 한번에 가능한 스마트 접수 플랫폼">
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background: #f7f7f7;
-      margin: 0;
-      padding: 0;
-      color: #333;
-    }
-    header {
-      background: #003366;
-      color: white;
-      text-align: center;
-      padding: 2rem 1rem;
-    }
-    header h1 { margin: 0; font-size: 1.8rem; }
-    .container {
-      max-width: 960px;
-      margin: 2rem auto;
-      background: white;
-      padding: 2rem;
-      border-radius: 10px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-    }
-    label {
-      font-weight: bold;
-      display: block;
-      margin-top: 1.2rem;
-    }
-    input, select, textarea {
-      width: 100%;
-      padding: 0.6rem;
-      margin-top: 0.3rem;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-      font-size: 1rem;
-    }
-    .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
-    button {
-      background: #0050b3;
-      color: white;
-      border: none;
-      padding: 0.8rem 2rem;
-      font-size: 1.1rem;
-      border-radius: 6px;
-      cursor: pointer;
-      margin-top: 2rem;
-    }
-    footer {
-      text-align: center;
-      color: #777;
-      font-size: 0.9rem;
-      padding: 2rem;
-    }
-  </style>
+  <title>중기넷 | 안성·평택·용인 장비 빠른 배차</title>
+  <meta
+    name="description"
+    content="안성·평택·용인 지역 덤프, 굴삭기 등 건설장비 빠른 배차 접수. 장비 요청부터 기사·장비 등록까지 한 번에 가능한 중기넷."
+  />
+  <meta name="theme-color" content="#0a3d91" />
+  <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
-  <header>
-    <h1>중기넷 통합 접수 플랫폼</h1>
-    <p>장비·인력 구인/구직부터 픽업까지 한번에 신청하세요</p>
-  </header>
+  <div class="topbar">
+    <div class="wrap topbar-inner">
+      <a href="#" class="brand">
+        <span class="brand-badge">중</span>
+        <span>중기넷</span>
+      </a>
 
-  <div class="container">
-    <form action="mailto:your@email.com" method="POST" enctype="text/plain">
-      <div class="grid">
-        <div>
-          <label>신청 구분</label>
-          <select name="신청 구분" required>
-            <option value="">선택하세요</option>
-            <option value="구인">구인 (사장님)</option>
-            <option value="구직">구직 (기사님/인부)</option>
-          </select>
-        </div>
-        <div>
-          <label>신청 대상</label>
-          <select name="신청 대상" required>
-            <option value="">선택하세요</option>
-            <option value="장비">장비</option>
-            <option value="인력">인력</option>
-          </select>
+      <div class="top-actions">
+        <a class="btn btn-light" href="#request-form">빠른 접수</a>
+        <a class="btn btn-accent phone-link" href="tel:01049017168">📞 바로 전화</a>
+      </div>
+    </div>
+  </div>
+
+  <header class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <div class="hero-badge">안성 · 평택 · 용인 중심 배차 접수</div>
+        <h1>덤프 · 굴삭기 · 토공장비<br />빠르게 연결하는 중기넷</h1>
+        <p>
+          현장에 필요한 장비 요청부터 기사·장비 등록까지 간편하게 접수하고,
+          확인 연락을 통해 빠르게 조건을 조율할 수 있습니다.
+        </p>
+
+        <div class="hero-cta">
+          <a class="btn btn-accent phone-link" href="tel:01049017168">📞 전화로 바로 문의</a>
+          <a class="btn btn-light" href="#request-form">📝 접수폼 바로가기</a>
         </div>
       </div>
 
-      <label>장비 선택 (장비일 경우)</label>
-      <select name="장비 항목">
-        <option value="">선택하세요</option>
-        <option>덤프 5톤</option>
-        <option>덤프 15톤</option>
-        <option>덤프 25톤</option>
-        <option>굴삭기 미니</option>
-        <option>굴삭기 03W</option>
-        <option>굴삭기 06W</option>
-        <option>굴삭기 10W</option>
-        <option>굴삭기 380W</option>
-        <option>롤러</option>
-        <option>도자</option>
-        <option>그레이다</option>
-      </select>
+      <div class="hero-card">
+        <div class="hero-stats">
+          <div class="stat">
+            <strong>운영 지역</strong>
+            <span>안성 · 평택 · 용인 중심으로 대응</span>
+          </div>
+          <div class="stat">
+            <strong>주요 장비</strong>
+            <span>덤프, 굴삭기, 롤러, 도자, 그레이더</span>
+          </div>
+          <div class="stat">
+            <strong>진행 방식</strong>
+            <span>접수 → 확인 연락 → 조건 조율 → 배차 진행</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
 
-      <label>인력 선택 (인력일 경우)</label>
-      <select name="인력 직종">
-        <option value="">선택하세요</option>
-        <option>목수</option>
-        <option>형틀목수</option>
-        <option>철근공</option>
-        <option>콘크리트공</option>
-        <option>미장공</option>
-        <option>타일공</option>
-        <option>방수공</option>
-        <option>조적공</option>
-        <option>비계공</option>
-        <option>해체공</option>
-        <option>배관공</option>
-        <option>설비공</option>
-        <option>전기공</option>
-        <option>용접공</option>
-        <option>신호수</option>
-        <option>곰방</option>
-        <option>공구리</option>
-        <option>잡부</option>
-        <option>운반공</option>
-        <option>소장</option>
-        <option>반장</option>
-        <option>현장보조</option>
-        <option>크레인 유도</option>
-        <option>석면 해체</option>
-      </select>
+  <main class="wrap">
+    <section class="section">
+      <div class="card">
+        <h2 class="section-title">왜 중기넷이 편한가</h2>
+        <p class="section-desc">
+          현장에서 헷갈리지 않도록 필요한 기능만 단순하게 정리했습니다.
+        </p>
 
-      <label>현장 위치</label>
-      <input type="text" name="현장 위치" placeholder="예: 경기도 안성시 보개면 ○○현장" />
+        <div class="quick-grid">
+          <div class="quick-item">
+            <strong>장비 요청</strong>
+            <p>현장 위치, 날짜, 시간, 장비 종류만 입력하면 빠르게 확인 가능합니다.</p>
+          </div>
+          <div class="quick-item">
+            <strong>기사·장비 등록</strong>
+            <p>구직 또는 장비 등록도 같은 화면에서 쉽게 접수할 수 있습니다.</p>
+          </div>
+          <div class="quick-item">
+            <strong>전화 즉시 연결</strong>
+            <p>급한 현장은 폼 입력 없이 바로 전화 문의가 가능합니다.</p>
+          </div>
+        </div>
+      </div>
+    </section>
 
-      <label>희망 일자</label>
-      <input type="date" name="희망 일자" />
+    <section class="section" id="request-form">
+      <div class="form-wrap">
+        <div class="form-card">
+          <div class="chip-row">
+            <span class="chip">빠른 접수</span>
+            <span class="chip">모바일 최적화</span>
+            <span class="chip">장비 · 인력 선택형</span>
+          </div>
 
-      <label>픽업 서비스</label>
-      <select name="픽업 서비스">
-        <option value="">선택하세요</option>
-        <option>필요함 (픽업 요청)</option>
-        <option>불필요함 (자가 출퇴근)</option>
-      </select>
+          <h2 class="section-title">중기넷 간편 접수폼</h2>
+          <p class="section-desc">
+            필요한 항목만 보이도록 구성했습니다. 급한 경우에는 바로 전화 문의를 이용하세요.
+          </p>
 
-      <label>요청 내용 / 비고</label>
-      <textarea name="요청 내용" rows="4" placeholder="작업 조건, 경력, 특이사항 등"></textarea>
+          <form id="contactForm">
+            <div class="field">
+              <label>신청 구분<span class="required">*</span></label>
+              <div class="radio-group" id="requestTypeGroup">
+                <label class="radio-card active">
+                  <input type="radio" name="신청구분" value="구인" checked />
+                  구인 (사장님)
+                </label>
+                <label class="radio-card">
+                  <input type="radio" name="신청구분" value="구직" />
+                  구직 (기사님/인부)
+                </label>
+              </div>
+            </div>
 
-      <label>이름</label>
-      <input type="text" name="이름" placeholder="신청자 이름" required />
+            <div class="field">
+              <label>신청 대상<span class="required">*</span></label>
+              <div class="radio-group" id="targetTypeGroup">
+                <label class="radio-card active">
+                  <input type="radio" name="신청대상" value="장비" checked />
+                  장비
+                </label>
+                <label class="radio-card">
+                  <input type="radio" name="신청대상" value="인력" />
+                  인력
+                </label>
+              </div>
+            </div>
 
-      <label>연락처</label>
-      <input type="tel" name="연락처" placeholder="예: 010-1234-5678" required />
+            <div id="equipmentSection">
+              <div class="field">
+                <label for="equipment">장비 선택<span class="required">*</span></label>
+                <select id="equipment" name="장비항목">
+                  <option value="">선택하세요</option>
+                  <option>덤프 5톤</option>
+                  <option>덤프 15톤</option>
+                  <option>덤프 25톤</option>
+                  <option>굴삭기 미니</option>
+                  <option>굴삭기 03W</option>
+                  <option>굴삭기 06W</option>
+                  <option>굴삭기 10W</option>
+                  <option>굴삭기 380W</option>
+                  <option>롤러</option>
+                  <option>도자</option>
+                  <option>그레이더</option>
+                  <option>살수차</option>
+                  <option>로우더</option>
+                  <option>불도저</option>
+                </select>
+              </div>
+            </div>
 
-      <button type="submit">접수하기</button>
-    </form>
-  </div>
+            <div id="workerSection" class="hidden">
+              <div class="field">
+                <label for="worker">인력 선택<span class="required">*</span></label>
+                <select id="worker" name="인력직종">
+                  <option value="">선택하세요</option>
+                  <option>목수</option>
+                  <option>형틀목수</option>
+                  <option>철근공</option>
+                  <option>콘크리트공</option>
+                  <option>미장공</option>
+                  <option>타일공</option>
+                  <option>방수공</option>
+                  <option>조적공</option>
+                  <option>비계공</option>
+                  <option>해체공</option>
+                  <option>배관공</option>
+                  <option>설비공</option>
+                  <option>전기공</option>
+                  <option>용접공</option>
+                  <option>신호수</option>
+                  <option>곰방</option>
+                  <option>공구리</option>
+                  <option>잡부</option>
+                  <option>운반공</option>
+                  <option>소장</option>
+                  <option>반장</option>
+                  <option>현장보조</option>
+                  <option>크레인 유도</option>
+                  <option>석면 해체</option>
+                </select>
+              </div>
+            </div>
 
-  <footer>
-    © 2025 JUNGGINET.COM | 스마트 건설 장비 & 인력 매칭 시스템
-  </footer>
+            <div class="grid-2">
+              <div class="field">
+                <label for="location">현장 위치<span class="required">*</span></label>
+                <input
+                  type="text"
+                  id="location"
+                  name="현장위치"
+                  placeholder="예: 경기도 안성시 보개면 ○○현장"
+                  required
+                />
+                <div class="hint">현장 주소 또는 가까운 지역명을 입력해주세요.</div>
+              </div>
+
+              <div class="field">
+                <label for="dateTime">희망 일자 · 시간<span class="required">*</span></label>
+                <input type="datetime-local" id="dateTime" name="희망일시" required />
+                <div class="hint">날짜와 시간, 분까지 선택해주세요.</div>
+              </div>
+            </div>
+
+            <div class="grid-2">
+              <div class="field">
+                <label for="pickup">픽업 서비스</label>
+                <select id="pickup" name="픽업서비스">
+                  <option value="">선택하세요</option>
+                  <option>필요함 (픽업 요청)</option>
+                  <option>불필요함 (자가 출퇴근)</option>
+                </select>
+              </div>
+
+              <div class="field">
+                <label for="area">희망 지역</label>
+                <input
+                  type="text"
+                  id="area"
+                  name="희망지역"
+                  placeholder="예: 안성 / 평택 / 용인"
+                />
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="memo">요청 내용 / 비고</label>
+              <textarea
+                id="memo"
+                name="요청내용"
+                placeholder="작업 조건, 장비 대수, 작업시간, 경력, 급여조건, 특이사항 등을 적어주세요"
+              ></textarea>
+            </div>
+
+            <div class="grid-2">
+              <div class="field">
+                <label for="name">이름<span class="required">*</span></label>
+                <input
+                  type="text"
+                  id="name"
+                  name="이름"
+                  placeholder="신청자 이름"
+                  required
+                />
+              </div>
+
+              <div class="field">
+                <label for="phone">연락처<span class="required">*</span></label>
+                <input
+                  type="tel"
+                  id="phone"
+                  name="연락처"
+                  placeholder="예: 010-1234-5678"
+                  required
+                />
+                <div class="hint">숫자와 하이픈 형태로 적어주시면 확인이 빠릅니다.</div>
+              </div>
+            </div>
+
+            <div class="submit-box">
+              <button class="btn btn-primary submit-btn" type="submit">
+                🚀 빠르게 접수하기
+              </button>
+
+              <div class="sub-actions">
+                <a class="btn btn-accent phone-link" href="tel:01049017168">📞 바로 전화</a>
+                <a class="btn btn-light kakao-link" href="https://open.kakao.com/" target="_blank" rel="noopener noreferrer">
+                  💬 카카오톡 문의
+                </a>
+              </div>
+            </div>
+
+            <div class="notice">
+              접수 버튼을 누르면 입력한 내용이 메일앱으로 정리되어 열립니다.
+              이메일 주소, 카카오톡 링크, 전화번호는 <strong>js/main.js</strong>에서 바꾸면 됩니다.
+            </div>
+
+            <div class="success-box" id="successBox">
+              입력 내용을 확인했습니다. 잠시 후 메일앱이 열립니다.
+            </div>
+          </form>
+        </div>
+
+        <div class="side-card">
+          <h2 class="section-title">접수 후 진행 절차</h2>
+          <p class="section-desc">
+            접수 후 아래 순서로 진행됩니다.
+          </p>
+
+          <div class="step-list">
+            <div class="step">
+              <strong>1. 접수 확인</strong>
+              입력하신 내용 확인 후 담당자가 검토합니다.
+            </div>
+            <div class="step">
+              <strong>2. 연락 및 조건 확인</strong>
+              현장 위치, 날짜, 시간, 장비 종류, 인력 조건 등을 확인합니다.
+            </div>
+            <div class="step">
+              <strong>3. 배차 또는 등록 조율</strong>
+              가능한 장비 및 기사 여부를 안내드립니다.
+            </div>
+            <div class="step">
+              <strong>4. 최종 진행</strong>
+              배차 또는 등록을 도와드립니다.
+            </div>
+          </div>
+
+          <div class="spacer"></div>
+
+          <h2 class="section-title">안내 사항</h2>
+          <ul class="list">
+            <li>급한 현장은 폼보다 전화 문의가 더 빠를 수 있습니다.</li>
+            <li>현장 위치와 연락처는 정확히 입력해주셔야 확인이 빠릅니다.</li>
+            <li>장비 요청과 인력 요청은 선택에 따라 입력 항목이 자동 변경됩니다.</li>
+            <li>희망 일시에는 날짜와 시간, 분까지 입력할 수 있습니다.</li>
+          </ul>
+
+          <div class="cta-band">
+            <h3>급한 배차는 바로 전화하세요</h3>
+            <p>폼 작성보다 빠르게 연결하고 싶다면 즉시 전화 문의가 가장 빠릅니다.</p>
+            <a class="btn btn-light phone-link" href="tel:01049017168">📞 010-4901-7168</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="card">
+        <h2 class="section-title">주요 대응 장비</h2>
+        <p class="section-desc">
+          아래 장비 중심으로 요청을 받고 있습니다.
+        </p>
+
+        <div class="quick-grid">
+          <div class="quick-item">
+            <strong>덤프</strong>
+            <p>5톤, 15톤, 25톤 등 현장 상황에 맞는 배차 요청</p>
+          </div>
+          <div class="quick-item">
+            <strong>굴삭기</strong>
+            <p>미니, 03W, 06W, 10W, 380W 등 선택 가능</p>
+          </div>
+          <div class="quick-item">
+            <strong>기타 장비</strong>
+            <p>롤러, 도자, 그레이더, 살수차, 로우더 등</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      © 2025 JUNGGINET.COM | 건설장비 · 기사 · 현장 접수 시스템
+    </footer>
+  </main>
+
+  <script src="js/main.js"></script>
 </body>
 </html>
