@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>중기넷 관리자</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <div class="topbar">
+    <div class="wrap topbar-inner">
+      <a href="index.html" class="brand">
+        <span class="brand-badge">중</span>
+        <span>중기넷 관리자</span>
+      </a>
+    </div>
+  </div>
+
+  <main class="wrap" style="padding-top:24px; padding-bottom:40px;">
+    <div class="card">
+      <h2 class="section-title">접수 목록</h2>
+      <p class="section-desc">최근 접수 내역을 불러옵니다.</p>
+
+      <div class="grid-2">
+        <div class="field">
+          <label for="adminKey">관리자 키</label>
+          <input type="password" id="adminKey" placeholder="관리자 키 입력" />
+        </div>
+        <div class="field" style="display:flex; align-items:end;">
+          <button class="btn btn-primary" id="loadBtn" type="button">목록 불러오기</button>
+        </div>
+      </div>
+
+      <div id="adminMessage" class="notice" style="margin-top:12px;"></div>
+
+      <div style="overflow:auto; margin-top:18px;">
+        <table id="requestTable" style="width:100%; border-collapse:collapse;">
+          <thead>
+            <tr>
+              <th style="text-align:left; border-bottom:1px solid #ddd; padding:10px;">접수시각</th>
+              <th style="text-align:left; border-bottom:1px solid #ddd; padding:10px;">구분</th>
+              <th style="text-align:left; border-bottom:1px solid #ddd; padding:10px;">대상</th>
+              <th style="text-align:left; border-bottom:1px solid #ddd; padding:10px;">장비/직종</th>
+              <th style="text-align:left; border-bottom:1px solid #ddd; padding:10px;">현장위치</th>
+              <th style="text-align:left; border-bottom:1px solid #ddd; padding:10px;">희망일시</th>
+              <th style="text-align:left; border-bottom:1px solid #ddd; padding:10px;">이름</th>
+              <th style="text-align:left; border-bottom:1px solid #ddd; padding:10px;">연락처</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+  </main>
+
+  <script>
+    const API_URL = "여기에_앱스크립트_배포_URL_붙여넣기";
+
+    const loadBtn = document.getElementById("loadBtn");
+    const adminKeyInput = document.getElementById("adminKey");
+    const adminMessage = document.getElementById("adminMessage");
+    const tbody = document.querySelector("#requestTable tbody");
+
+    loadBtn.addEventListener("click", async () => {
+      const adminKey = adminKeyInput.value.trim();
+      if (!adminKey) {
+        adminMessage.textContent = "관리자 키를 입력해주세요.";
+        return;
+      }
+
+      adminMessage.textContent = "불러오는 중...";
+      tbody.innerHTML = "";
+
+      try {
+        const res = await fetch(`${API_URL}?adminKey=${encodeURIComponent(adminKey)}`);
+        const data = await res.json();
+
+        if (!data.ok) {
+          adminMessage.textContent = data.message || "불러오기에 실패했습니다.";
+          return;
+        }
+
+        adminMessage.textContent = `총 ${data.rows.length}건 불러왔습니다.`;
+
+        data.rows.forEach((row) => {
+          const tr = document.createElement("tr");
+          tr.innerHTML = `
+            <td style="border-bottom:1px solid #eee; padding:10px;">${row.createdAt || ""}</td>
+            <td style="border-bottom:1px solid #eee; padding:10px;">${row.requestType || ""}</td>
+            <td style="border-bottom:1px solid #eee; padding:10px;">${row.targetType || ""}</td>
+            <td style="border-bottom:1px solid #eee; padding:10px;">${row.item || ""}</td>
+            <td style="border-bottom:1px solid #eee; padding:10px;">${row.location || ""}</td>
+            <td style="border-bottom:1px solid #eee; padding:10px;">${row.dateTime || ""}</td>
+            <td style="border-bottom:1px solid #eee; padding:10px;">${row.name || ""}</td>
+            <td style="border-bottom:1px solid #eee; padding:10px;">${row.phone || ""}</td>
+          `;
+          tbody.appendChild(tr);
+        });
+      } catch (err) {
+        adminMessage.textContent = "네트워크 오류가 발생했습니다.";
+      }
+    });
+  </script>
+</body>
+</html>
