@@ -5,7 +5,7 @@
   3) PHONE_NUMBER   : 실제 대표 전화번호
 */
 const RECEIVER_EMAIL = "lyslhj@daum.net";
-const KAKAO_URL = "https://open.kakao.com/";
+const KAKAO_URL = "https://open.kakao.com/o/g5NbSfph/";
 const PHONE_NUMBER = "01049017168";
 
 // 공통 링크 반영
