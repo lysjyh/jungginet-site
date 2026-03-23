@@ -1,4 +1,4 @@
-const API_URL = "여기에_앱스크립트_배포_URL_붙여넣기";
+const API_URL = "https://script.google.com/macros/s/AKfycbzXzNybe9nK0HPembodjwoRP25F93I9RnCa4Df2E0k8tr9fsfNf7VI1ppmZBpJ9RxJu/exec";
 const KAKAO_URL = "https://open.kakao.com/o/g5NbSfph";
 const PHONE_NUMBER = "01049017168";
 
