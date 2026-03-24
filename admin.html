@@ -4,57 +4,164 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>중기넷 관리자</title>
-  <link rel="stylesheet" href="css/style.css" />
+  <meta name="theme-color" content="#0c2340" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .admin-wrap {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 40px 20px 60px;
+    }
+
+    .admin-card {
+      background: #fff;
+      border: 1px solid #e6edf5;
+      border-radius: 28px;
+      box-shadow: 0 20px 40px rgba(14, 32, 63, 0.10);
+      padding: 28px;
+    }
+
+    .admin-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 22px;
+    }
+
+    .admin-title {
+      margin: 0;
+      font-size: 2rem;
+      color: #0c2340;
+      letter-spacing: -0.03em;
+    }
+
+    .admin-desc {
+      margin: 10px 0 0;
+      color: #6c7a90;
+    }
+
+    .admin-controls {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+
+    .admin-message {
+      color: #6c7a90;
+      margin-bottom: 16px;
+      font-size: 0.95rem;
+    }
+
+    .table-box {
+      overflow: auto;
+      border: 1px solid #e8eef6;
+      border-radius: 20px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 980px;
+      background: #fff;
+    }
+
+    th {
+      text-align: left;
+      background: #f6f9fd;
+      color: #0c2340;
+      font-size: 0.92rem;
+      padding: 14px 12px;
+      border-bottom: 1px solid #e6edf5;
+    }
+
+    td {
+      padding: 14px 12px;
+      border-bottom: 1px solid #eef3f8;
+      color: #24344f;
+      vertical-align: top;
+      font-size: 0.94rem;
+    }
+
+    tr:hover td {
+      background: #fbfdff;
+    }
+
+    @media (max-width: 820px) {
+      .admin-controls {
+        grid-template-columns: 1fr;
+      }
+
+      .admin-card {
+        padding: 20px;
+      }
+
+      .admin-title {
+        font-size: 1.6rem;
+      }
+    }
+  </style>
 </head>
 <body>
-  <div class="topbar">
+  <header class="topbar">
     <div class="wrap topbar-inner">
       <a href="index.html" class="brand">
-        <span class="brand-badge">중</span>
-        <span>중기넷 관리자</span>
-      </a>
-    </div>
-  </div>
-
-  <main class="wrap" style="padding-top:24px; padding-bottom:40px;">
-    <div class="card">
-      <h2 class="section-title">접수 목록</h2>
-      <p class="section-desc">최근 접수 내역을 불러옵니다.</p>
-
-      <div class="grid-2">
-        <div class="field">
-          <label for="adminKey">관리자 키</label>
-          <input type="password" id="adminKey" placeholder="관리자 키 입력" />
+        <div class="brand-mark">중</div>
+        <div class="brand-text">
+          <strong>중기넷 관리자</strong>
+          <span>접수 확인 · 운영 관리</span>
         </div>
-        <div class="field" style="display:flex; align-items:end;">
-          <button class="btn btn-primary" id="loadBtn" type="button">목록 불러오기</button>
+      </a>
+
+      <nav class="nav">
+        <a class="btn btn-light" href="index.html">메인으로</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="admin-wrap">
+    <section class="admin-card">
+      <div class="admin-top">
+        <div>
+          <h1 class="admin-title">접수 목록</h1>
+          <p class="admin-desc">저장된 현장 접수 내역을 확인하고 운영에 바로 반영할 수 있습니다.</p>
         </div>
       </div>
 
-      <div id="adminMessage" class="notice" style="margin-top:12px;"></div>
+      <div class="admin-controls">
+        <input type="password" id="adminKey" placeholder="관리자 키를 입력하세요" />
+        <button class="btn btn-primary" id="loadBtn" type="button">목록 불러오기</button>
+      </div>
 
-      <div style="overflow:auto; margin-top:18px;">
-        <table id="requestTable" style="width:100%; border-collapse:collapse;">
+      <div class="admin-message" id="adminMessage">관리자 키 입력 후 목록 불러오기를 누르세요.</div>
+
+      <div class="table-box">
+        <table id="requestTable">
           <thead>
             <tr>
-              <th style="text-align:left; border-bottom:1px solid #ddd; padding:10px;">접수시각</th>
-              <th style="text-align:left; border-bottom:1px solid #ddd; padding:10px;">구분</th>
-              <th style="text-align:left; border-bottom:1px solid #ddd; padding:10px;">대상</th>
-              <th style="text-align:left; border-bottom:1px solid #ddd; padding:10px;">장비/직종</th>
-              <th style="text-align:left; border-bottom:1px solid #ddd; padding:10px;">현장위치</th>
-              <th style="text-align:left; border-bottom:1px solid #ddd; padding:10px;">희망일시</th>
-              <th style="text-align:left; border-bottom:1px solid #ddd; padding:10px;">이름</th>
-              <th style="text-align:left; border-bottom:1px solid #ddd; padding:10px;">연락처</th>
+              <th>접수시각</th>
+              <th>구분</th>
+              <th>대상</th>
+              <th>장비/직종</th>
+              <th>현장위치</th>
+              <th>희망일시</th>
+              <th>픽업</th>
+              <th>희망지역</th>
+              <th>이름</th>
+              <th>연락처</th>
+              <th>비고</th>
             </tr>
           </thead>
           <tbody></tbody>
         </table>
       </div>
-    </div>
+    </section>
   </main>
 
   <script>
-    const API_URL = "https://script.google.com/macros/s/AKfycbzXzNybe9nK0HPembodjwoRP25F93I9RnCa4Df2E0k8tr9fsfNf7VI1ppmZBpJ9RxJu/exec";
+    const API_URL = "여기에_현재_앱스크립트_URL_붙여넣기";
 
     const loadBtn = document.getElementById("loadBtn");
     const adminKeyInput = document.getElementById("adminKey");
@@ -63,12 +170,13 @@
 
     loadBtn.addEventListener("click", async () => {
       const adminKey = adminKeyInput.value.trim();
+
       if (!adminKey) {
         adminMessage.textContent = "관리자 키를 입력해주세요.";
         return;
       }
 
-      adminMessage.textContent = "불러오는 중...";
+      adminMessage.textContent = "불러오는 중입니다...";
       tbody.innerHTML = "";
 
       try {
@@ -76,27 +184,30 @@
         const data = await res.json();
 
         if (!data.ok) {
-          adminMessage.textContent = data.message || "불러오기에 실패했습니다.";
+          adminMessage.textContent = data.message || "목록을 불러오지 못했습니다.";
           return;
         }
 
-        adminMessage.textContent = `총 ${data.rows.length}건 불러왔습니다.`;
+        adminMessage.textContent = `총 ${data.rows.length}건을 불러왔습니다.`;
 
         data.rows.forEach((row) => {
           const tr = document.createElement("tr");
           tr.innerHTML = `
-            <td style="border-bottom:1px solid #eee; padding:10px;">${row.createdAt || ""}</td>
-            <td style="border-bottom:1px solid #eee; padding:10px;">${row.requestType || ""}</td>
-            <td style="border-bottom:1px solid #eee; padding:10px;">${row.targetType || ""}</td>
-            <td style="border-bottom:1px solid #eee; padding:10px;">${row.item || ""}</td>
-            <td style="border-bottom:1px solid #eee; padding:10px;">${row.location || ""}</td>
-            <td style="border-bottom:1px solid #eee; padding:10px;">${row.dateTime || ""}</td>
-            <td style="border-bottom:1px solid #eee; padding:10px;">${row.name || ""}</td>
-            <td style="border-bottom:1px solid #eee; padding:10px;">${row.phone || ""}</td>
+            <td>${row.createdAt || ""}</td>
+            <td>${row.requestType || ""}</td>
+            <td>${row.targetType || ""}</td>
+            <td>${row.item || ""}</td>
+            <td>${row.location || ""}</td>
+            <td>${row.dateTime || ""}</td>
+            <td>${row.pickup || ""}</td>
+            <td>${row.area || ""}</td>
+            <td>${row.name || ""}</td>
+            <td>${row.phone || ""}</td>
+            <td>${row.memo || ""}</td>
           `;
           tbody.appendChild(tr);
         });
-      } catch (err) {
+      } catch (error) {
         adminMessage.textContent = "네트워크 오류가 발생했습니다.";
       }
     });
