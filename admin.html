@@ -131,7 +131,7 @@
       </div>
 
       <div class="admin-controls">
-        <input type="password" id="adminKey" placeholder="관리자 키를 입력하세요" />
+        <input type="password" id="adminKey" placeholder="8904" />
         <button class="btn btn-primary" id="loadBtn" type="button">목록 불러오기</button>
       </div>
 
@@ -172,7 +172,7 @@
       const adminKey = adminKeyInput.value.trim();
 
       if (!adminKey) {
-        adminMessage.textContent = "8904";
+        adminMessage.textContent = "관리자 키를 입력해주세요.";
         return;
       }
 
