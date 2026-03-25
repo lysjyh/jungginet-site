@@ -403,7 +403,7 @@
         </div>
 
         <div class="toolbar">
-          <button class="btn btn-subtle" id="saveAllBtn" type="button">관리 메모 전체 저장</button>
+          <button class="btn btn-subtle" id="saveAllBtn" type="button">현재 화면 전체 저장</button>
           <button class="btn btn-subtle" id="exportCsvBtn" type="button">CSV 다운로드</button>
           <button class="btn btn-subtle" id="showUrgentBtn" type="button">긴급건만 보기</button>
           <button class="btn btn-subtle" id="resetFilterBtn" type="button">필터 초기화</button>
@@ -417,6 +417,9 @@
             <option value="연락완료">연락완료</option>
             <option value="배차완료">배차완료</option>
             <option value="완료">완료</option>
+            <option value="작업중">작업중</option>
+            <option value="보류">보류</option>
+            <option value="취소">취소</option>
           </select>
           <select id="priorityFilter">
             <option value="">긴급도 전체</option>
@@ -480,14 +483,13 @@
             <tbody></tbody>
           </table>
         </div>
-        <div class="foot-note">관리 상태, 작업금액, 내부 메모는 브라우저 로컬 저장소에 저장됩니다. 서버에 영구 저장하려면 Google Apps Script도 함께 확장해야 합니다.</div>
+        <div class="foot-note">이 파일은 상태, 금액, 수수료, 관리메모를 Google Sheet에 직접 저장합니다.</div>
       </section>
     </div>
   </main>
 
   <script>
     const API_URL = "https://script.google.com/macros/s/AKfycbwfVJh5wh0mBaK9TkKzfidJ7fo6f0P-UwLs2tkLZ35_LrZ1nRZ_K6acVxXjBn3ZMTrx/exec";
-    const STORAGE_KEY = "jungginet_admin_runtime_v1";
     const FEE_RATE = 0.05;
     const OWNED_EQUIPMENT_KEYWORDS = ["덤프", "덤프트럭", "포크레인", "굴착기", "텐", "앞사바리", "15톤", "6w", "6W", "excavator", "dump"];
     const ANSEONG_KEYWORDS = ["안성", "공도", "원곡", "양성", "죽산", "일죽", "미양", "대덕", "보개", "서운", "금광", "삼죽", "고삼"];
@@ -538,39 +540,6 @@
       return `${num.toLocaleString("ko-KR")}원`;
     }
 
-    function readRuntimeStore() {
-      try {
-        return JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}");
-      } catch {
-        return {};
-      }
-    }
-
-    function writeRuntimeStore(data) {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
-    }
-
-    function rowKey(row) {
-      return [row.createdAt, row.phone, row.name, row.item, row.location].map(v => String(v || "").trim()).join("|");
-    }
-
-    function getRuntime(row) {
-      const store = readRuntimeStore();
-      return store[rowKey(row)] || {};
-    }
-
-    function saveRuntime(row, payload) {
-      const store = readRuntimeStore();
-      const key = rowKey(row);
-      store[key] = {
-        status: payload.status || "접수됨",
-        amount: normalizeNumber(payload.amount),
-        note: payload.note || "",
-        savedAt: new Date().toISOString()
-      };
-      writeRuntimeStore(store);
-    }
-
     function classifyArea(row) {
       const text = `${row.location || ""} ${row.area || ""}`;
       return ANSEONG_KEYWORDS.some(k => text.includes(k)) ? "안성" : "기타";
@@ -595,6 +564,9 @@
       if (status === "완료") return "badge-green";
       if (status === "배차완료") return "badge-blue";
       if (status === "연락완료") return "badge-orange";
+      if (status === "작업중") return "badge-blue";
+      if (status === "보류") return "badge-orange";
+      if (status === "취소") return "badge-gray";
       return "badge-gray";
     }
 
@@ -611,19 +583,17 @@
 
     function enrichRows(rows) {
       return rows.map((row) => {
-        const runtime = getRuntime(row);
-        const amount = normalizeNumber(runtime.amount || 0);
-        const status = runtime.status || "접수됨";
+        const amount = normalizeNumber(row.price || 0);
+        const status = row.status || "접수됨";
         const priority = classifyPriority(row);
         const ownership = classifyOwnership(row);
         const areaClass = classifyArea(row);
         return {
           ...row,
-          runtime,
           status,
           amount,
           fee: Math.round(amount * FEE_RATE),
-          note: runtime.note || "",
+          note: row.adminMemo || "",
           priority,
           ownership,
           areaClass,
@@ -652,7 +622,7 @@
       const urgentCount = rows.filter(r => r.priority.label === "긴급").length;
       const needCallCount = rows.filter(r => r.callNeeded).length;
       const ownedCount = rows.filter(r => r.ownership === "내 장비 우선").length;
-      const dispatchedCount = rows.filter(r => r.status === "배차완료" || r.status === "완료").length;
+      const dispatchedCount = rows.filter(r => ["배차완료", "작업중", "완료"].includes(r.status)).length;
       const feeTotal = rows.reduce((sum, r) => sum + r.fee, 0);
 
       statTotal.textContent = String(rows.length);
@@ -689,11 +659,14 @@
           <td>
             <div class="cell-stack">
               <span class="badge ${statusBadgeClass(row.status)}">${escapeHtml(row.status)}</span>
-              <select class="small-select js-status" data-key="${escapeHtml(rowKey(row))}">
+              <select class="small-select js-status" data-rowindex="${row.rowIndex}">
                 <option value="접수됨" ${row.status === "접수됨" ? "selected" : ""}>접수됨</option>
                 <option value="연락완료" ${row.status === "연락완료" ? "selected" : ""}>연락완료</option>
                 <option value="배차완료" ${row.status === "배차완료" ? "selected" : ""}>배차완료</option>
                 <option value="완료" ${row.status === "완료" ? "selected" : ""}>완료</option>
+                <option value="작업중" ${row.status === "작업중" ? "selected" : ""}>작업중</option>
+                <option value="보류" ${row.status === "보류" ? "selected" : ""}>보류</option>
+                <option value="취소" ${row.status === "취소" ? "selected" : ""}>취소</option>
               </select>
             </div>
           </td>
@@ -712,13 +685,13 @@
           </td>
           <td>
             <div class="cell-stack">
-              <input class="small-input js-amount" data-key="${escapeHtml(rowKey(row))}" inputmode="numeric" value="${row.amount ? escapeHtml(String(row.amount)) : ""}" placeholder="금액 입력" />
+              <input class="small-input js-amount" data-rowindex="${row.rowIndex}" inputmode="numeric" value="${row.amount ? escapeHtml(String(row.amount)) : ""}" placeholder="금액 입력" />
               <div class="sub">기사와 협의한 금액</div>
             </div>
           </td>
           <td><strong>${escapeHtml(formatMoney(row.fee))}</strong><div class="sub">자동 계산</div></td>
           <td>
-            <textarea class="note js-note" data-key="${escapeHtml(rowKey(row))}" placeholder="내 장비 우선 / 외부 연락처 / 특이사항">${escapeHtml(row.note)}</textarea>
+            <textarea class="note js-note" data-rowindex="${row.rowIndex}" placeholder="내 장비 우선 / 외부 연락처 / 특이사항">${escapeHtml(row.note)}</textarea>
           </td>
           <td>
             <button class="mini-btn js-save" data-index="${index}">저장</button>
@@ -731,22 +704,49 @@
       renderStats(rows);
     }
 
-    function getRowByKey(key) {
-      return loadedRows.find(row => rowKey(row) === key);
+    async function saveRow(rowIndex, payload) {
+      const res = await fetch(API_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          rowIndex,
+          ...payload
+        })
+      });
+
+      return res.json();
     }
 
-    function persistRowByKey(key) {
-      const row = getRowByKey(key);
-      if (!row) return;
+    async function persistByRowIndex(rowIndex) {
+      const statusEl = document.querySelector(`.js-status[data-rowindex="${rowIndex}"]`);
+      const amountEl = document.querySelector(`.js-amount[data-rowindex="${rowIndex}"]`);
+      const noteEl = document.querySelector(`.js-note[data-rowindex="${rowIndex}"]`);
 
-      const statusEl = document.querySelector(`.js-status[data-key="${CSS.escape(key)}"]`);
-      const amountEl = document.querySelector(`.js-amount[data-key="${CSS.escape(key)}"]`);
-      const noteEl = document.querySelector(`.js-note[data-key="${CSS.escape(key)}"]`);
+      const amount = normalizeNumber(amountEl?.value || 0);
+      const payload = {
+        status: statusEl?.value || "접수됨",
+        price: amount,
+        fee: Math.round(amount * FEE_RATE),
+        adminMemo: noteEl?.value || ""
+      };
 
-      saveRuntime(row, {
-        status: statusEl?.value || row.status,
-        amount: amountEl?.value || row.amount,
-        note: noteEl?.value || row.note
+      const data = await saveRow(rowIndex, payload);
+      if (!data.ok) {
+        throw new Error(data.message || "저장 실패");
+      }
+
+      loadedRows = loadedRows.map((row) => {
+        if (String(row.rowIndex) !== String(rowIndex)) return row;
+        return {
+          ...row,
+          ...payload,
+          status: payload.status,
+          price: payload.price,
+          fee: payload.fee,
+          adminMemo: payload.adminMemo
+        };
       });
 
       loadedRows = enrichRows(loadedRows);
@@ -822,20 +822,37 @@
 
     loadBtn.addEventListener("click", loadRows);
     refreshBtn.addEventListener("click", loadRows);
-    saveAllBtn.addEventListener("click", () => {
-      document.querySelectorAll(".js-save").forEach((button) => {
-        const row = button.closest("tr");
-        const key = row?.querySelector(".js-status")?.dataset.key;
-        if (key) persistRowByKey(key);
-      });
-      adminMessage.textContent = "현재 화면의 관리 메모와 상태를 저장했습니다.";
+
+    saveAllBtn.addEventListener("click", async () => {
+      const buttons = Array.from(document.querySelectorAll(".js-save"));
+      if (!buttons.length) {
+        adminMessage.textContent = "저장할 접수가 없습니다.";
+        return;
+      }
+
+      adminMessage.textContent = "현재 화면 전체 저장 중입니다...";
+      try {
+        for (const button of buttons) {
+          const row = button.closest("tr");
+          const rowIndex = row?.querySelector(".js-status")?.dataset.rowindex;
+          if (rowIndex) {
+            await persistByRowIndex(rowIndex);
+          }
+        }
+        adminMessage.textContent = "현재 화면의 상태, 금액, 관리메모를 모두 저장했습니다.";
+      } catch (error) {
+        adminMessage.textContent = "전체 저장 중 오류가 발생했습니다.";
+      }
     });
+
     exportCsvBtn.addEventListener("click", exportCsv);
+
     showUrgentBtn.addEventListener("click", () => {
       urgentOnly = !urgentOnly;
       showUrgentBtn.textContent = urgentOnly ? "긴급건만 보기 해제" : "긴급건만 보기";
       renderTable();
     });
+
     resetFilterBtn.addEventListener("click", () => {
       urgentOnly = false;
       showUrgentBtn.textContent = "긴급건만 보기";
@@ -852,21 +869,33 @@
       el.addEventListener("change", renderTable);
     });
 
-    tbody.addEventListener("click", (event) => {
+    tbody.addEventListener("click", async (event) => {
       const saveBtn = event.target.closest(".js-save");
       if (!saveBtn) return;
+
       const row = saveBtn.closest("tr");
-      const key = row?.querySelector(".js-status")?.dataset.key;
-      if (!key) return;
-      persistRowByKey(key);
-      adminMessage.textContent = "해당 접수의 관리 정보가 저장되었습니다.";
+      const rowIndex = row?.querySelector(".js-status")?.dataset.rowindex;
+      if (!rowIndex) return;
+
+      adminMessage.textContent = "저장 중입니다...";
+      try {
+        await persistByRowIndex(rowIndex);
+        adminMessage.textContent = "해당 접수의 상태, 금액, 관리메모가 저장되었습니다.";
+      } catch (error) {
+        adminMessage.textContent = "저장에 실패했습니다.";
+      }
     });
 
-    tbody.addEventListener("change", (event) => {
+    tbody.addEventListener("change", async (event) => {
       const statusEl = event.target.closest(".js-status");
       if (!statusEl) return;
-      persistRowByKey(statusEl.dataset.key);
-      adminMessage.textContent = "상태를 저장했습니다.";
+      adminMessage.textContent = "상태 저장 중입니다...";
+      try {
+        await persistByRowIndex(statusEl.dataset.rowindex);
+        adminMessage.textContent = "상태를 저장했습니다.";
+      } catch (error) {
+        adminMessage.textContent = "상태 저장에 실패했습니다.";
+      }
     });
 
     tbody.addEventListener("input", (event) => {
