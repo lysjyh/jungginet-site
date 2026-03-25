@@ -1,4 +1,4 @@
-const API_URL = "https://script.google.com/macros/s/AKfycbzXzNybe9nK0HPembodjwoRP25F93I9RnCa4Df2E0k8tr9fsfNf7VI1ppmZBpJ9RxJu/exec";
+const API_URL = "https://script.google.com/macros/s/AKfycbwfVJh5wh0mBaK9TkKzfidJ7fo6f0P-UwLs2tkLZ35_LrZ1nRZ_K6acVxXjBn3ZMTrx/exec";
 const KAKAO_URL = "https://open.kakao.com/o/g5NbSfph";
 const PHONE_NUMBER = "01049017168";
 
